@@ -1,0 +1,239 @@
+# Go talks 
+
+Zlatko Bratkovic
+
+zlatko.bratkovic@gmail.com
+
+## News
+
+.background https://camo.githubusercontent.com/2b507540e2681c1a25698f246b9dca69c30548ed66a7323075b0224cbb1bf058/68747470733a2f2f676f6c616e672e6f72672f646f632f676f706865722f6669766579656172732e6a7067
+
+ 
+  
+   
+
+.image https://miro.medium.com/v2/resize:fit:720/format:webp/1*hkssi0vXpvEVh2grkR4FOw.png _ 300
+
+
+## min & max
+
+&nbsp;
+
+.play -edit min_max\hello.go /^//START/,/^//END/ 
+
+
+## min & max
+
+&nbsp;
+
+.play -edit min_max3\hello.go /^//START/,/^//END/ 
+
+## clear
+
+&nbsp;
+
+- clear "zeros" all elements from a map, slice, or type parameter type
+
+&nbsp;
+
+.play -edit clear\main.go 
+
+## log/slog
+
+&nbsp;
+
+- structured logging
+
+&nbsp;
+
+.play -edit slog\main.go 
+
+## log/slog - filename
+
+&nbsp;
+
+.play -edit slog2\main.go /^//START/,/^//END/
+
+## slices package
+
+&nbsp;
+
+&nbsp;
+ 
+.play -edit slices\main.go /^//START/,/^//END/
+
+## slices package
+
+
+.play -edit slices2\main.go /^//START/,/^//END/
+
+- removes the elements s[i:j] from s, returning the modified slice. 
+- panics if s[i:j] is not a valid slice of s. 
+- complexity is O(len(s)-j), so if many items must be deleted, it is better to make a single call deleting them all together than to delete one at a time. 
+- might not modify the elements. If those elements contain pointers you might consider zeroing those elements so that objects they reference can be garbage collected.
+
+## loopvar experiment
+
+.play -edit loopvar\main.go /^//START/,/^//END/
+
+## go toolchain
+
+    module gitlab.com/my/package
+
+    go 1.21
+
+    toolchain go1.21.1
+
+- automatic downloading of toolchain
+- run, tidy, get all are respecting toolchain
+- consistend builds
+- works with go.work
+
+## Web applications, scraping and telegram bots
+
+.background img\back-cloud.jpeg
+
+## Problem 
+
+&nbsp;
+&nbsp;
+
+- web application
+- no api
+- auto logoff
+
+## Web scraping
+
+net/http
+
+    httpClient: &http.Client{
+		Timeout: Timeout,
+		Jar:     jar,
+	}
+
+github.com/PuerkitoBio/goquery
+
+    doc.Find("div.content > div.table-container.new-table").
+		Each(func(i int, table *goquery.Selection) {
+			subject, subjectOK := table.Attr("data-action-id")
+			if !subjectOK {
+				return
+			}
+            ...
+
+## Web scraping
+
+github.com/gocolly/colly
+
+    c := colly.NewCollector()
+    c.Visit("https://en.wikipedia.org/wiki/Main_Page")
+
+    c.OnRequest(func(r *colly.Request) { 
+        fmt.Println("Visiting: ", r.URL) 
+    }) 
+    
+    c.OnError(func(_ *colly.Response, err error) { 
+        log.Println("Something went wrong: ", err) 
+    }) 
+    
+    c.OnResponse(func(r *colly.Response) { 
+        fmt.Println("Page visited: ", r.Request.URL) 
+    }) 
+    
+    c.OnHTML("a", func(e *colly.HTMLElement) { 
+        // printing all URLs associated with the a links in the page 
+        fmt.Println("%v", e.Attr("href")) 
+    }) 
+    
+    c.OnScraped(func(r *colly.Response) { 
+        fmt.Println(r.Request.URL, " scraped!") 
+    })
+    
+
+## chromedp - using Chrome
+
+github.com/chromedp/chromedp
+
+- Chrome is run in headless mode
+    - Chrome DevTools Protocol
+
+- various options
+
+Example:
+
+    opts := append(chromedp.DefaultExecAllocatorOptions[:],
+		chromedp.DisableGPU,
+		chromedp.UserDataDir(dir),
+	)
+
+	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	defer cancel()
+
+## chromedp - setup
+
+.code topic/chromedev.go
+
+## chromedp - intercepting network requests
+
+.code topic/scan.go
+
+## chromedp - waiting events
+
+.code topic/submit.go
+
+## chromedp - more complex scan
+
+.code topic/chromedev2.go
+
+## 'new' UI
+
+.image https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png _ 300
+
+- do we need web application?
+    - simplicity, hosting ...
+- are users OK with using chat application
+- is telegram secure ?
+
+## Telegram - setup
+
+github.com/go-telegram-bot-api/telegram-bot-api/v5
+
+.code topic/telegram.go
+
+## UI - Menu
+
+- menu creation is done with `BotFather`
+
+.image img/telegram-menu.png
+
+## Telegram - updates
+
+- update.Message.Text
+- update.Message.From.ID
+- update.Message.Chat.ID
+
+.code topic/telegram2.go
+
+## Telegram - updates
+
+- update.CallbackQuery.Data
+- update.CallbackQuery.From.ID
+- update.CallbackQuery.Chat.ID
+
+.code topic/telegram3.go
+
+## Telegram - image
+
+.code topic/telegram4.go
+
+## UI image
+
+.image img/telegram-today.png
+
+## Telegram - buttons
+
+.code topic/telegram5.go
+
+## UI preview
+
+.image img/telegram-date.png

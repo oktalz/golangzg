@@ -1,0 +1,12 @@
+go 1.21.1
+
+use (
+	./meetups/2023-09-26/clear
+	./meetups/2023-09-26/loopvar
+	./meetups/2023-09-26/min_max
+	./meetups/2023-09-26/min_max3
+	./meetups/2023-09-26/slices
+	./meetups/2023-09-26/slices2
+	./meetups/2023-09-26/slog
+	./meetups/2023-09-26/slog2
+)
