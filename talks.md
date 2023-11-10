@@ -7,7 +7,7 @@
 by [Branko Zecevic](https://www.linkedin.com/in/bzecevic/)
 - [Examples](assets/2023/10/)
 
-### **GoTalks 26.09.2023.** [<img src="assets/images/meetup_logo.jpg" alt="meetup.com" width="24"/>](https://www.meetup.com/golang-zg/events/296122228/) [<img src="assets/images/codotto.jpg" alt="codotto.com" width="24"/>](https://codotto.com/meetups/go-talks)
+### **GoTalks 26.09.2023.** [<img src="assets/images/meetup_logo.jpg" alt="meetup.com" width="24"/>](https://www.meetup.com/golang-zg/events/296122228/) [<img src="assets/images/codotto.jpg" alt="codotto.com" width="24"/>](https://codotto.com/meetups/go-talks) [<img src="assets/images/youtube_logo.jpg" alt="codotto.com" width="24"/>](https://youtu.be/kAwKnqyPxPc)
 - [Web scrapping and different ideas about UI (do we need it)](https://github.com/oktalz/go-meetup-2023-09-26/)
 by [Zlatko Bratkovic](https://www.linkedin.com/in/bratkoviczlatko/)
 
